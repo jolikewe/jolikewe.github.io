@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jovi — projects</title>
+<meta name="description" content="Machine learning, quantitative finance and optimisation projects by Jovi, each with a headline result and, where available, a live demo.">
+<meta property="og:title" content="Jovi — projects">
+<meta property="og:description" content="Seven projects with real results: a Hangman GRU at 52.7%, a leverage-effect study, CP-SAT scheduling, a Uniswap arbitrage explorer and more.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2312131c'/%3E%3Ctext x='32' y='46' font-size='38' font-weight='700' text-anchor='middle' fill='%23ffcb6b' font-family='sans-serif'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e7eaf3;--ink:#12131c;--mut:#5b5f78;--display:'Bricolage Grotesque','Hanken Grotesk',system-ui,sans-serif;--body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(60% 40% at 10% 0%,rgba(255,95,178,.18),transparent 70%),radial-gradient(50% 40% at 95% 5%,rgba(88,225,255,.22),transparent 70%),radial-gradient(60% 40% at 50% 100%,rgba(138,120,255,.16),transparent 70%);
+  background-repeat:no-repeat}
+a{color:inherit}
+:focus-visible{outline:3px solid #6a5cff;outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+header{display:flex;justify-content:space-between;align-items:center;padding:24px 0}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font:600 14px var(--body);text-decoration:none;border:1.5px solid var(--ink);background:transparent;color:var(--ink);transition:background .2s,color .2s,transform .2s}
+.pill:hover{background:var(--ink);color:#fff}
+.pill.solid{background:var(--ink);color:#fff}
+.pill.solid:hover{background:#2a2c40}
+h1{font:800 clamp(56px,13vw,184px)/.88 var(--display);letter-spacing:-.045em;margin:34px 0 0}
+h1 span{display:block;color:transparent;-webkit-text-stroke:2px var(--ink)}
+@media (max-width:600px){h1 span{-webkit-text-stroke:1.5px var(--ink)}}
+.intro{display:flex;justify-content:space-between;gap:30px;align-items:end;flex-wrap:wrap;margin:34px 0 46px}
+.intro p{margin:0;font-size:clamp(18px,1.8vw,22px);max-width:36ch;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;padding-bottom:30px}
+.card{--fg:#fff;--sub:rgba(255,255,255,.68);--line:rgba(255,255,255,.2);position:relative;grid-column:span 4;border-radius:28px;padding:26px;color:var(--fg);
+  display:flex;flex-direction:column;gap:14px;overflow:hidden;min-height:400px;isolation:isolate;animation:rise .7s cubic-bezier(.2,.7,.2,1) backwards}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.19s}.card:nth-child(4){animation-delay:.26s}.card:nth-child(5){animation-delay:.33s}.card:nth-child(6){animation-delay:.4s}.card:nth-child(7){animation-delay:.47s}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}}
+@media (prefers-reduced-motion:reduce){.card{animation:none}}
+.card::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.16),transparent 60%);opacity:0;transition:opacity .3s}
+.card:hover::after{opacity:1}
+.w7{grid-column:span 7}.w5{grid-column:span 5}.w6{grid-column:span 6}
+@media (max-width:1000px){.card,.w7,.w5,.w6{grid-column:span 12}.card{min-height:0}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.name{font:700 18px var(--display);letter-spacing:-.01em}
+.badge{font:600 12.5px var(--body);padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--sub);white-space:nowrap}
+.badge.live{background:#fff;color:#12131c;border-color:#fff}
+.num{font:800 clamp(54px,7vw,96px)/.95 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin-top:6px}
+.num small{font-size:.34em;font-weight:600;letter-spacing:-.01em;margin-left:6px;color:var(--sub)}
+.cap{margin:0;color:var(--sub);max-width:42ch}
+.desc{margin:0;color:var(--fg);max-width:46ch;font-size:15.5px}
+.card:not(.w7):not(.w5):not(.w6) .num small{display:block;margin:8px 0 0;font-size:20px}
+.motif{margin-top:auto;width:100%}
+.motif svg{display:block;width:100%;height:auto}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.b{display:inline-flex;align-items:center;padding:9px 16px;border-radius:999px;font:600 14px var(--body);text-decoration:none;border:1.5px solid var(--line);color:var(--fg);transition:transform .2s,background .2s}
+.b:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+.b.demo{background:var(--fg);color:var(--bgc);border-color:var(--fg)}
+.b.demo:hover{background:var(--fg);filter:brightness(.92)}
+/* themes echo each project's own page */
+.hang{background:#15171f;--bgc:#15171f}
+.lev{background:#fff;color:#12131c;--fg:#12131c;--sub:#5b5f78;--line:rgba(18,19,28,.25);--bgc:#fff}
+.lev .b.demo{background:#12131c;color:#fff;border-color:#12131c}
+.lev::after{background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,95,95,.12),transparent 60%)}
+.veh{background:#0e3b3d;--bgc:#0e3b3d}
+.uni{background:linear-gradient(150deg,#1a1450,#0a0b24 55%,#10253a);--bgc:#0a0b24}
+.uni .b.demo{background:linear-gradient(120deg,#ff5fb2,#8a78ff);color:#fff;border-color:transparent}
+.trd{background:#16301f;--bgc:#16301f}
+.rag{background:#e1dcff;color:#12131c;--fg:#12131c;--sub:#4b4770;--line:rgba(18,19,28,.25)}
+.qlo{background:#ffd9c7;color:#12131c;--fg:#12131c;--sub:#6a4636;--line:rgba(18,19,28,.28)}
+.rag::after,.qlo::after{background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.5),transparent 60%)}
+.tiles{display:flex;gap:7px;flex-wrap:wrap}
+.tile{width:40px;height:48px;border-radius:9px;display:grid;place-items:center;font:700 22px var(--display);background:#ffcb6b;color:#15171f}
+.tile.h{background:transparent;border:2px dashed rgba(255,255,255,.3);color:transparent}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;padding:30px 0 50px;color:var(--mut);font-size:14px}
+@media (max-width:600px){.tile{width:34px;height:42px;font-size:19px}.tiles{gap:5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="name">Jovi</span>
+  <a class="pill" href="https://github.com/jolikewe" rel="noopener">GitHub profile</a>
+</header>
+<main>
+  <h1>Jovi<span>projects</span></h1>
+  <div class="intro">
+    <p>Seven projects across machine learning, quantitative finance and optimisation. Each shows one number from its own results.</p>
+    <a class="pill solid" href="https://github.com/jolikewe" rel="noopener">See all repositories</a>
+  </div>
+
+  <div class="grid">
+    <!-- hangman -->
+    <article class="card hang w7">
+      <div class="top"><span class="name">hangman-neural-network</span><span class="badge live">Live demo</span></div>
+      <div class="num">52.7%<small>win rate</small></div>
+      <p class="cap">A bidirectional GRU against 18.8% for the dictionary baseline, 1,000 games on unseen words.</p>
+      <div class="motif">
+        <div class="tiles" aria-label="Hangman word with some letters hidden"><span class="tile">H</span><span class="tile h">_</span><span class="tile">N</span><span class="tile h">_</span><span class="tile">M</span><span class="tile h">_</span><span class="tile">N</span></div>
+      </div>
+      <div class="btns"><a class="b demo" href="https://jolikewe.github.io/hangman-neural-network/" rel="noopener">Live demo</a><a class="b" href="https://github.com/jolikewe/hangman-neural-network" rel="noopener">GitHub</a></div>
+    </article>
+
+    <!-- leverage -->
+    <article class="card lev w5">
+      <div class="top"><span class="name">leverage_effect</span><span class="badge live" style="background:#12131c;color:#fff;border-color:#12131c">Live demo</span></div>
+      <div class="num">1.018<small>Sharpe</small></div>
+      <p class="cap">HAR volatility-targeted book on all ten futures, 1995 to 2017, net of costs.</p>
+      <div class="motif" aria-label="Leverage correlation S for the ten instruments, all negative">
+        <svg viewBox="0 0 300 70" role="img" aria-label="Bars of cumulative leverage correlation per instrument">
+          <g id="levbars"></g>
+        </svg>
+      </div>
+      <div class="btns"><a class="b demo" href="https://jolikewe.github.io/leverage_effect/" rel="noopener">Live demo</a><a class="b" href="https://github.com/jolikewe/leverage_effect" rel="noopener">GitHub</a></div>
+    </article>
+
+    <!-- vehicle -->
+    <article class="card veh">
+      <div class="top"><span class="name">vehicle_routing</span><span class="badge live">Live demo</span></div>
+      <div class="num">531<small>optimal</small></div>
+      <p class="cap">Total arrival time for 18 people through a two-stage transport system, solved with CP-SAT.</p>
+      <div class="motif">
+        <svg viewBox="0 0 300 90" role="img" aria-label="Start points, holding points and destination points joined by routes">
+          <g stroke="#7fe3c3" stroke-width="2" fill="none" opacity=".7"><path d="M30 20 L130 45"/><path d="M30 45 L130 45"/><path d="M30 70 L130 45"/><path d="M130 45 L270 25" stroke-dasharray="5 5"/><path d="M130 45 L270 65" stroke-dasharray="5 5"/></g>
+          <g fill="#0e3b3d" stroke="#7fe3c3" stroke-width="2.5"><circle cx="30" cy="20" r="8"/><circle cx="30" cy="45" r="8"/><circle cx="30" cy="70" r="8"/><circle cx="270" cy="25" r="8"/><circle cx="270" cy="65" r="8"/></g>
+          <circle cx="130" cy="45" r="13" fill="#7fe3c3"/>
+          <g fill="#cdeee4" font-size="11" font-family="Hanken Grotesk,sans-serif"><text x="30" y="88" text-anchor="middle">start</text><text x="130" y="76" text-anchor="middle">holding</text><text x="270" y="88" text-anchor="middle">destination</text></g>
+        </svg>
+      </div>
+      <div class="btns"><a class="b demo" href="https://jolikewe.github.io/vehicle_routing/" rel="noopener">Live demo</a><a class="b" href="https://github.com/jolikewe/vehicle_routing" rel="noopener">GitHub</a></div>
+    </article>
+
+    <!-- uniswap -->
+    <article class="card uni">
+      <div class="top"><span class="name">uniswap-exchange</span><span class="badge live">Live demo</span></div>
+      <div class="num">0.035<small>ETH profit</small></div>
+      <p class="cap">Arbitrage on 10 DAI between two constant-product pools, with a 0.3% fee.</p>
+      <div class="motif">
+        <svg viewBox="0 0 300 90" role="img" aria-label="The curve x times y equals k">
+          <defs><linearGradient id="ug" x1="0" x2="1"><stop offset="0" stop-color="#ff5fb2"/><stop offset=".5" stop-color="#8a78ff"/><stop offset="1" stop-color="#58e1ff"/></linearGradient><filter id="ugl"><feGaussianBlur stdDeviation="3"/></filter></defs>
+          <path id="ucurve" fill="none" stroke="url(#ug)" stroke-width="4" stroke-linecap="round"/>
+          <path id="ucurve2" fill="none" stroke="url(#ug)" stroke-width="7" stroke-linecap="round" opacity=".5" filter="url(#ugl)"/>
+          <circle id="udot" r="6" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="btns"><a class="b demo" href="https://jolikewe.github.io/uniswap-exchange/" rel="noopener">Live demo</a><a class="b" href="https://github.com/jolikewe/uniswap-exchange" rel="noopener">GitHub</a></div>
+    </article>
+
+    <!-- trade_ideas -->
+    <article class="card trd">
+      <div class="top"><span class="name">trade_ideas</span><span class="badge">GitHub only</span></div>
+      <div class="num">11<small>walk-forward windows</small></div>
+      <p class="cap">Regime-gated mean reversion on S&amp;P 500 stocks: a Ridge model on 12 features, 20 positions, validated 2010 to 2025.</p>
+      <div class="motif">
+        <svg viewBox="0 0 300 90" role="img" aria-label="Rolling windows of four years training, one year validation, one year test">
+          <g id="wf"></g>
+        </svg>
+      </div>
+      <div class="btns"><a class="b" href="https://github.com/jolikewe/trade_ideas" rel="noopener">GitHub</a></div>
+    </article>
+
+    <!-- RAG -->
+    <article class="card rag w6" style="min-height:360px">
+      <div class="top"><span class="name">information-retrieval-with-RAG</span><span class="badge">GitHub only</span></div>
+      <div class="num">93<small>sections, 768-d vectors</small></div>
+      <p class="cap">Ask a question about a PDF system manual and get the best-matching sections, pages and images back.</p>
+      <div class="motif">
+        <svg viewBox="0 0 300 70" role="img" aria-label="Points in a vector space with a query and its nearest neighbours">
+          <g id="vecs"></g>
+        </svg>
+      </div>
+      <div class="btns"><a class="b" href="https://github.com/jolikewe/information-retrieval-with-RAG" rel="noopener">GitHub</a></div>
+    </article>
+
+    <!-- QLoRA -->
+    <article class="card qlo w6" style="min-height:360px">
+      <div class="top"><span class="name">Fine-tuning-LLM-with-QLoRA</span><span class="badge">GitHub only</span></div>
+      <div class="num">0.642<small>F1 on SQuAD v2</small></div>
+      <p class="cap">Flan-T5 fine-tuned in 4-bit with LoRA adapters, training only 0.71% of its parameters.</p>
+      <div class="motif">
+        <svg viewBox="0 0 300 60" role="img" aria-label="Trainable parameters are 0.71 percent of the total">
+          <rect x="0" y="14" width="300" height="22" rx="11" fill="rgba(18,19,28,.15)"/>
+          <rect x="0" y="14" width="10" height="22" rx="5" fill="#12131c"/>
+          <g font-size="12" font-family="Hanken Grotesk,sans-serif" fill="#4b3226"><text x="0" y="56">1.77 M trainable</text><text x="300" y="56" text-anchor="end">249.3 M total</text></g>
+        </svg>
+      </div>
+      <div class="btns"><a class="b" href="https://github.com/jolikewe/Fine-tuning-LLM-with-QLoRA" rel="noopener">GitHub</a></div>
+    </article>
+  </div>
+</main>
+<div class="foot"><span>Jovi · 2026</span><a href="https://github.com/jolikewe" rel="noopener">github.com/jolikewe</a></div>
+</div>
+<script>
+const NS='http://www.w3.org/2000/svg';
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+// leverage: cumulative leverage correlation S per instrument (README table), bars hang down from 0
+(function(){const S=[-3.118,-2.760,-2.491,-2.131,-1.935,-1.292,-0.447,-0.409,-0.306,-0.216],g=document.getElementById('levbars');
+ mk('line',{x1:0,x2:300,y1:6,y2:6,stroke:'#12131c','stroke-width':1.5},g);
+ S.forEach((s,i)=>mk('rect',{x:i*30+4,y:6,width:22,height:Math.abs(s)/3.118*56,rx:4,fill:i<5?'#ff5a5f':'#9aa0bd'},g));})();
+// uniswap: x*y=k
+(function(){let d='';for(let i=0;i<=60;i++){const x=.75+i*(7.25/60);d+=(i?'L':'M')+(x*37.5).toFixed(1)+' '+(80-3/x*20).toFixed(1)} // schematic of y=3/x
+ document.getElementById('ucurve').setAttribute('d',d);document.getElementById('ucurve2').setAttribute('d',d);
+ const x=2.1;const dot=document.getElementById('udot');dot.setAttribute('cx',x*37.5);dot.setAttribute('cy',80-3/x*20);})();
+// trade_ideas: 11 walk-forward windows, 4 train / 1 val / 1 test years (config described in README)
+(function(){const g=document.getElementById('wf'),u=300/16;
+ for(let i=0;i<11;i++){const y=i*8;mk('rect',{x:i*u,y,width:4*u-1,height:6,rx:2,fill:'#6fe39a'},g);mk('rect',{x:(i+4)*u,y,width:u-1,height:6,rx:2,fill:'#ffcb6b'},g);mk('rect',{x:(i+5)*u,y,width:u-1,height:6,rx:2,fill:'#ff7aa8'},g)}})();
+// RAG: decorative vector space, query with nearest neighbours
+(function(){const g=document.getElementById('vecs');let s=7;const r=()=>(s=(s*16807)%2147483647)/2147483647;
+ const q=[200,34],pts=[];for(let i=0;i<46;i++)pts.push([10+r()*280,6+r()*58]);
+ pts.sort((a,b)=>Math.hypot(a[0]-q[0],a[1]-q[1])-Math.hypot(b[0]-q[0],b[1]-q[1]));
+ pts.forEach((p,i)=>{if(i<3)mk('line',{x1:q[0],y1:q[1],x2:p[0],y2:p[1],stroke:'#4b4770','stroke-width':1.5,'stroke-dasharray':'3 3'},g)});
+ pts.forEach((p,i)=>mk('circle',{cx:p[0],cy:p[1],r:i<3?5:3,fill:i<3?'#5a3fff':'#4b4770',opacity:i<3?1:.45},g));
+ mk('circle',{cx:q[0],cy:q[1],r:7,fill:'none',stroke:'#12131c','stroke-width':2.5},g)})();
+// pointer spotlight
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('pointermove',e=>{const b=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-b.left)+'px');c.style.setProperty('--my',(e.clientY-b.top)+'px')}));
+</script>
+</body>
+</html>
